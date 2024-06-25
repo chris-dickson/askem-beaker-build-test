@@ -1,9 +1,27 @@
 
 version: 2.1
-jobs:
-  build:
+
+executors:
+  amd64:
     docker:
       - image: cimg/base:current
+    environment:
+      PLATFORM: "linux/amd64"
+      EXECUTOR: "amd64"
+  arm64:
+    docker:
+      - image: cimg/base:current
+    resource_class: arm.large
+    environment:
+      PLATFORM: "linux/arm64"
+      EXECUTOR: "arm64"
+
+jobs:
+  build:
+    parameters:
+      platform:
+        type: executor
+    executor: << parameters.platform >>
     steps:
       - checkout
       - setup_remote_docker
@@ -14,4 +32,7 @@ jobs:
 workflows:
   build:
     jobs:
-      - build
+      - build:
+          matrix:
+            parameters:
+              platform: [amd64, arm64]
