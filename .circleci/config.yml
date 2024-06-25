@@ -6,6 +6,7 @@ jobs:
       - image: cimg/base:current
     steps:
       - checkout
+      - setup_remote_docker
       - run:
           name: "Full Build"
           command: |
