@@ -1,0 +1,118 @@
+---
+# Jupyter LLM docker compose by Matthew Printz
+
+version: '3.9'
+
+include:
+  - docker/hmi/docker-compose-base.yml
+  - docker/hmi/docker-compose-common.yml
+  - docker/hmi/docker-compose-keycloak.yml
+
+services:
+  hmi-server:
+    image: ghcr.io/darpa-askem/hmi-server:latest
+    container_name: hmi-server
+    ports:
+      - "3000:3000"
+    healthcheck:
+      test:
+        [
+          "CMD",
+          "curl",
+          "--head",
+          "0.0.0.0:3000/actuator/health"
+        ]
+      interval: "3s"
+      timeout: "3s"
+      retries: 30
+    environment:
+      ADOBE_API-KEY: ""
+      AWS_ACCESS_KEY_ID: "admin"
+      AWS_SECRET_ACCESS_KEY: "admin123"
+      AWS_URL: "http://minio:9000"
+      CIEMSS-SERVICE_URL: "http://pyciemss-service:8000"
+      GOOGLE-ANALYTICS-ID: ""
+      SIMULATION-SERVICE_URL: "http://sciml-service:8080"
+      SPICEDB_LAUNCHMODE: "PLAINTEXT"
+      SPICEDB_SHARED-KEY: "dev"
+      SPICEDB_TARGET: "spicedb:50051"
+      SPRING_DATASOURCE_INITIALIZE: true
+      SPRING_DATASOURCE_URL: "jdbc:postgresql://postgres:5432/terarium"
+      SPRING_DATA_REDIS_URL: "redis://redis:6379"
+      SPRING_JPA_HIBERNATE_DDL-AUTO: "update"
+      SPRING_NEO4J_AUTHENTICATION_PASSWORD: "password"
+      SPRING_NEO4J_AUTHENTICATION_USERNAME: "neo4j"
+      SPRING_NEO4J_URI: "bolt://neo4j:7687"
+      SPRING_PROFILES_ACTIVE: "default"
+      SPRING_RABBITMQ_ADDRESSES: "amqp://rabbitmq:5672"
+      SPRING_RABBITMQ_PASSWORD: "terarium123"
+      SPRING_RABBITMQ_USERNAME: "terarium"
+      SPRING_SECURITY_OAUTH2_CLIENT_PROVIDER_KEYCLOAK_ISSUER-URI: "http://keycloak:8081/realms/Terarium"
+      SPRING_SECURITY_OAUTH2_CLIENT_REGISTRATION_KEYCLOAK_CLIENT-ID: "app"
+      SPRING_SECURITY_OAUTH2_RESOURCESERVER_JWT_ISSUER-URI: "http://keycloak:8081/realms/Terarium"
+      TERARIUM_DB_PASSWORD: "postgres"
+      TERARIUM_DB_USERNAME: "postgres"
+      TERARIUM_ELASTICSEARCH_AUTH-ENABLED: false
+      TERARIUM_ELASTICSEARCH_URL: "http://elasticsearch:9200"
+      TERARIUM_FILE-STORAGE-S3-BUCKET-NAME: "askem-local-storage"
+      TERARIUM_KEYCLOAK_ADMIN-CLIENT-ID: "admin-cli"
+      TERARIUM_KEYCLOAK_ADMIN-PASSWORD: "admin123"
+      TERARIUM_KEYCLOAK_ADMIN-REALM: "master"
+      TERARIUM_KEYCLOAK_ADMIN-USERNAME: "admin"
+      TERARIUM_KEYCLOAK_CLIENT-ID: "app"
+      TERARIUM_KEYCLOAK_REALM: "Terarium"
+      TERARIUM_KEYCLOAK_URL: "http://keycloak:8081"
+      TERARIUM_MQ-ADDRESSES: "amqp://rabbitmq:5672"
+      TERARIUM_SWAGGER_SERVER-URL: "http://localhost:3000"
+      TGPT_APP_URL: ""
+      TGPT_TOKEN: ""
+      TGPT_WS_URL: ""
+      XDD_API-ES-KEY: ""
+      XDD_API-KEY: ""
+    depends_on:
+      postgres:
+        condition: service_healthy
+      spicedb:
+        condition: service_healthy
+      keycloak:
+        condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
+      neo4j:
+        condition: service_healthy
+      minio:
+        condition: service_healthy
+      rabbitmq:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+  
+  jupyter:
+    build:
+      dockerfile: Dockerfile
+      context: .
+      args:
+        JULIA_IMAGE: askem-julia-base:build
+    ports:
+      - "8888:8888"
+    environment:
+      - DATA_SERVICE_URL=http://hmi-server:3000
+      - DEBUG=1
+      - JUPYTER_SERVER=http://jupyter:8888
+      - JUPYTER_TOKEN=89f73481102c46c0bc13b2998f9a4fce
+      - HMI_SERVER_URL=http://hmi-server:3000      
+      - AUTH_USERNAME=api-service
+      - AUTH_PASSWORD=agent bio terraform
+      
+    env_file:
+      - ./.env
+    volumes:
+      - ./src/askem_beaker:/home/jupyter/askem_beaker
+    command: ["python", "-m", "beaker_kernel.server.dev", "watch"]
+    depends_on:
+      hmi-server:
+        condition: service_healthy
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

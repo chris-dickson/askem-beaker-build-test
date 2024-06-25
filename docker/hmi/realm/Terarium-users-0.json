@@ -1,0 +1,195 @@
+{
+  "realm": "Terarium",
+  "users": [
+    {
+      "id": "930b9501-ab07-4baf-b5c8-d4095dc82b3b",
+      "createdTimestamp": 1660649774610,
+      "username": "adam",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "firstName": "Emperor",
+      "lastName": "Adam",
+      "email": "adam@test.io",
+      "credentials": [
+        {
+          "id": "9cf083a7-7577-476f-ad78-2255191f265d",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1708092558758,
+          "secretData": "{\"value\":\"Ur9xXuwpXBGUKSMU6LWIAzSYggcX6Kt4XmQ4RFB1tiU=\",\"salt\":\"BqXVGYJhMSg8rinJxl/16g==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "service-account",
+        "default-roles-terarium",
+        "user",
+        "admin"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "4f6ec93c-af9e-4002-9985-b86673b81772",
+      "createdTimestamp": 1708092648878,
+      "username": "api-service",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "firstName": "Internal",
+      "lastName": "Services",
+      "credentials": [
+        {
+          "id": "df4dfbca-e00f-4b01-a575-e40decd9bfe4",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1708092684456,
+          "secretData": "{\"value\":\"PqiMtG1iTTT6rWTaCqSsVsMnNSc8KZP2BZS/ESlmTvo=\",\"salt\":\"1lTVXbodEbkssgmRzCntGg==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":27500,\"algorithm\":\"pbkdf2-sha256\",\"additionalParameters\":{}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "service-account",
+        "default-roles-terarium",
+        "user",
+        "admin"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "abff4077-91b1-4d43-96c0-6d0550240573",
+      "createdTimestamp": 1708092230866,
+      "username": "service-account-account",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "account",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "3afcdbfe-4013-4353-98ca-14a5d3809e05",
+      "createdTimestamp": 1708092230874,
+      "username": "service-account-account-console",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "account-console",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "b31e3007-7ade-4efc-9f50-84e9bf5de95d",
+      "createdTimestamp": 1708092230880,
+      "username": "service-account-admin-cli",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "admin-cli",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "4619998b-f8ab-4448-817d-8c63f80f76ce",
+      "createdTimestamp": 1660649972958,
+      "username": "service-account-app",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "app",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "clientRoles": {
+        "app": [
+          "uma_protection"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "79c0414f-8fe8-4abe-8370-d24d2a3f6ed4",
+      "createdTimestamp": 1708092230888,
+      "username": "service-account-broker",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "broker",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "ad511612-701b-4c59-879c-e427d621b58d",
+      "createdTimestamp": 1677174093225,
+      "username": "service-account-realm-management",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "realm-management",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "clientRoles": {
+        "realm-management": [
+          "uma_protection"
+        ]
+      },
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "0ea0ac6c-c23c-4c81-b4f2-879c35c50459",
+      "createdTimestamp": 1708092230895,
+      "username": "service-account-security-admin-console",
+      "enabled": true,
+      "totp": false,
+      "emailVerified": false,
+      "serviceAccountClientId": "security-admin-console",
+      "credentials": [],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-terarium"
+      ],
+      "notBefore": 0,
+      "groups": []
+    }
+  ]
+}

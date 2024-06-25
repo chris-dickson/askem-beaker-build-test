@@ -1,0 +1,27 @@
+---
+# Jupyter LLM docker compose by Matthew Printz
+
+version: '3'
+services:
+  jupyter:
+    build:
+      dockerfile: Dockerfile
+      context: .
+    ports:
+      - "8888:8888"
+    environment:
+      - DEBUG=1
+      - JUPYTER_SERVER=http://jupyter:8888
+      - JUPYTER_TOKEN=89f73481102c46c0bc13b2998f9a4fce
+      - TOOL_ENABLED_ASK_USER=false
+      - TOOL_ENABLED_RUN_CODE=false
+      - ENABLE_CHECKPOINTS=false
+      - OPENAI_API_KEY
+    env_file:
+      - .env      
+    volumes:
+      - ./src/askem_beaker:/home/jupyter/askem_beaker
+      - .:/jupyter
+    command: ["python", "-m", "beaker_kernel.server.dev", "watch"]
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

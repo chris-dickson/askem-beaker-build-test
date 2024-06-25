@@ -1,0 +1,10 @@
+{
+    "mrros_dataset": {
+        "hmi_dataset_id": "149efd94-dc91-4673-9245-443ad61276ea", 
+        "filename": "cmip6-6e565455-9589-4d7c-8960-18c47ed6b9b7.nc"
+    },
+    "secondary_dataset": {
+        "hmi_dataset_id": "149efd94-dc91-4673-9245-443ad61276ea", 
+        "filename": "cmip6-6e565455-9589-4d7c-8960-18c47ed6b9b7.nc"
+    }
+}
